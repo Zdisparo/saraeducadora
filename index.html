@@ -29,6 +29,7 @@
       --danger:#e64545;
       --shadow:0 18px 55px rgba(10,35,90,.12);
       --shadow-soft:0 10px 30px rgba(10,35,90,.08);
+      --shadow-float:0 20px 50px rgba(9,34,89,.12);
       --radius-xl:28px;
       --radius-lg:22px;
       --radius-md:18px;
@@ -54,6 +55,20 @@
         radial-gradient(circle at top right, rgba(36,95,209,.14), transparent 24%),
         linear-gradient(180deg,#ffffff 0%, #f7faff 100%);
       overflow-x:hidden;
+      position:relative;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+      background:
+        radial-gradient(circle at 12% 14%, rgba(255,211,42,.10), transparent 18%),
+        radial-gradient(circle at 88% 22%, rgba(36,95,209,.08), transparent 18%),
+        radial-gradient(circle at 20% 76%, rgba(58,121,240,.06), transparent 18%),
+        radial-gradient(circle at 80% 82%, rgba(255,224,106,.10), transparent 18%);
     }
 
     img{
@@ -67,6 +82,240 @@
       text-decoration:none;
     }
 
+    .page-shell{
+      position:relative;
+      z-index:2;
+    }
+
+    .float-scene{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:1;
+      overflow:hidden;
+      perspective:1200px;
+    }
+
+    .edu-float{
+      position:absolute;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transform-style:preserve-3d;
+      will-change:transform, opacity;
+      opacity:.85;
+      filter:saturate(1.02);
+    }
+
+    .edu-float.glass{
+      background:rgba(255,255,255,.34);
+      border:1px solid rgba(255,255,255,.48);
+      box-shadow:
+        0 18px 45px rgba(8,33,77,.10),
+        inset 0 1px 0 rgba(255,255,255,.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .edu-float.book{
+      width:112px;
+      height:140px;
+      border-radius:28px;
+      top:11%;
+      left:2%;
+      transform:rotate(-12deg);
+    }
+
+    .edu-float.ruler{
+      width:160px;
+      height:54px;
+      border-radius:22px;
+      top:28%;
+      right:2%;
+      transform:rotate(18deg);
+    }
+
+    .edu-float.a-plus{
+      width:92px;
+      height:92px;
+      border-radius:24px;
+      top:56%;
+      left:3%;
+      transform:rotate(10deg);
+    }
+
+    .edu-float.cap{
+      width:126px;
+      height:126px;
+      border-radius:30px;
+      top:70%;
+      right:4%;
+      transform:rotate(-10deg);
+    }
+
+    .edu-float.pencil{
+      width:54px;
+      height:190px;
+      border-radius:26px;
+      top:40%;
+      left:10%;
+      transform:rotate(20deg);
+    }
+
+    .edu-float.note{
+      width:132px;
+      height:116px;
+      border-radius:28px;
+      top:14%;
+      right:11%;
+      transform:rotate(-11deg);
+    }
+
+    .edu-float.circle{
+      width:160px;
+      height:160px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,211,42,.18), rgba(255,211,42,.03) 65%, transparent 70%);
+      top:74%;
+      left:12%;
+      box-shadow:none;
+      border:none;
+      backdrop-filter:none;
+    }
+
+    .edu-float.circle-2{
+      width:200px;
+      height:200px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(36,95,209,.14), rgba(36,95,209,.03) 65%, transparent 70%);
+      top:8%;
+      right:16%;
+      box-shadow:none;
+      border:none;
+      backdrop-filter:none;
+    }
+
+    .edu-float-inner{
+      position:relative;
+      width:100%;
+      height:100%;
+      border-radius:inherit;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+
+    .edu-float-inner::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.44), transparent 45%),
+        linear-gradient(315deg, rgba(58,121,240,.10), transparent 55%);
+      pointer-events:none;
+    }
+
+    .edu-float .symbol{
+      position:relative;
+      z-index:2;
+      font-weight:900;
+      color:var(--blue-900);
+      line-height:1;
+      text-align:center;
+      text-shadow:0 1px 0 rgba(255,255,255,.6);
+    }
+
+    .edu-float.book .symbol{
+      font-size:50px;
+    }
+
+    .edu-float.ruler .symbol{
+      font-size:34px;
+      letter-spacing:2px;
+    }
+
+    .edu-float.a-plus .symbol{
+      font-size:34px;
+    }
+
+    .edu-float.cap .symbol{
+      font-size:52px;
+    }
+
+    .edu-float.pencil .symbol{
+      font-size:44px;
+    }
+
+    .edu-float.note .symbol{
+      font-size:34px;
+    }
+
+    .edu-float .mini-lines{
+      position:absolute;
+      inset:auto 18px 18px 18px;
+      display:grid;
+      gap:6px;
+      z-index:2;
+    }
+
+    .edu-float .mini-lines span{
+      height:6px;
+      border-radius:999px;
+      background:rgba(13,47,111,.16);
+    }
+
+    .edu-float .mini-lines span:nth-child(1){ width:70px; }
+    .edu-float .mini-lines span:nth-child(2){ width:48px; }
+    .edu-float .mini-lines span:nth-child(3){ width:62px; }
+
+    .edu-float .ruler-lines{
+      position:absolute;
+      inset:14px 14px;
+      display:flex;
+      gap:8px;
+      align-items:flex-end;
+      justify-content:center;
+      z-index:1;
+      opacity:.35;
+    }
+
+    .edu-float .ruler-lines span{
+      width:2px;
+      background:var(--blue-900);
+      border-radius:999px;
+    }
+
+    .edu-float .ruler-lines span:nth-child(odd){ height:20px; }
+    .edu-float .ruler-lines span:nth-child(even){ height:12px; }
+
+    .float-spin-soft{
+      animation:floatSoft 7s ease-in-out infinite;
+    }
+
+    .float-spin-soft-2{
+      animation:floatSoft2 8.2s ease-in-out infinite;
+    }
+
+    .float-spin-soft-3{
+      animation:floatSoft3 9s ease-in-out infinite;
+    }
+
+    @keyframes floatSoft{
+      0%,100%{ transform:translate3d(0,0,0) rotate(0deg); }
+      50%{ transform:translate3d(0,-10px,0) rotate(1.5deg); }
+    }
+
+    @keyframes floatSoft2{
+      0%,100%{ transform:translate3d(0,0,0) rotate(0deg); }
+      50%{ transform:translate3d(0,12px,0) rotate(-1.5deg); }
+    }
+
+    @keyframes floatSoft3{
+      0%,100%{ transform:translate3d(0,0,0) rotate(0deg); }
+      50%{ transform:translate3d(0,-8px,0) rotate(2deg); }
+    }
+
     .container{
       width:min(var(--container), calc(100% - 32px));
       margin:0 auto;
@@ -75,6 +324,12 @@
     .section{
       padding:80px 0;
       position:relative;
+    }
+
+    .section,
+    .hero,
+    .footer{
+      z-index:2;
     }
 
     .eyebrow{
@@ -144,6 +399,21 @@
       cursor:pointer;
       box-shadow:var(--shadow);
       width:auto;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .btn::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(120deg, transparent 20%, rgba(255,255,255,.35) 50%, transparent 80%);
+      transform:translateX(-130%);
+      transition:transform .8s ease;
+    }
+
+    .btn:hover::before{
+      transform:translateX(130%);
     }
 
     .btn:hover{
@@ -172,6 +442,7 @@
     .hero{
       padding:42px 0 60px;
       overflow:hidden;
+      position:relative;
     }
 
     .hero-wrap{
@@ -183,6 +454,8 @@
 
     .hero-copy{
       min-width:0;
+      position:relative;
+      z-index:2;
     }
 
     .hero-points{
@@ -206,6 +479,7 @@
       line-height:1.5;
       font-weight:700;
       color:var(--blue-900);
+      backdrop-filter:blur(8px);
     }
 
     .hero-point .icon{
@@ -233,6 +507,7 @@
       display:flex;
       justify-content:center;
       align-items:center;
+      z-index:2;
     }
 
     .hero-card{
@@ -362,6 +637,18 @@
       border:1px solid rgba(13,47,111,.08);
       box-shadow:var(--shadow-soft);
       overflow:hidden;
+      position:relative;
+    }
+
+    .mood-card::after{
+      content:"";
+      position:absolute;
+      inset:auto -50px -50px auto;
+      width:140px;
+      height:140px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,211,42,.18), transparent 70%);
+      pointer-events:none;
     }
 
     .mood-card.bad{
@@ -396,11 +683,12 @@
 
     .problem-box{
       margin-top:28px;
-      background:#fff;
+      background:rgba(255,255,255,.92);
       border:1px solid rgba(13,47,111,.08);
       border-radius:30px;
       padding:32px;
       box-shadow:var(--shadow-soft);
+      backdrop-filter:blur(8px);
     }
 
     .section-head{
@@ -460,6 +748,19 @@
       border-radius:32px;
       padding:34px;
       box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .solution-band::before{
+      content:"";
+      position:absolute;
+      top:-50px;
+      right:-50px;
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,211,42,.22), transparent 70%);
     }
 
     .solution-band h3{
@@ -467,12 +768,16 @@
       line-height:1.15;
       margin-bottom:12px;
       font-weight:900;
+      position:relative;
+      z-index:2;
     }
 
     .solution-band p{
       font-size:clamp(1rem, 1.5vw, 1.3rem);
       line-height:1.7;
       color:rgba(255,255,255,.94);
+      position:relative;
+      z-index:2;
     }
 
     .steps-grid{
@@ -483,13 +788,20 @@
 
     .step-card{
       min-width:0;
-      background:#fff;
+      background:rgba(255,255,255,.92);
       border:1px solid rgba(13,47,111,.08);
       border-radius:28px;
       padding:20px;
       box-shadow:var(--shadow-soft);
       position:relative;
       overflow:hidden;
+      backdrop-filter:blur(8px);
+      transition:transform .35s ease, box-shadow .35s ease;
+    }
+
+    .step-card:hover{
+      transform:translateY(-6px) rotateX(2deg) rotateY(-2deg);
+      box-shadow:0 22px 50px rgba(10,35,90,.14);
     }
 
     .step-card::before{
@@ -550,12 +862,13 @@
     }
 
     .testimonial-card{
-      background:#fff;
+      background:rgba(255,255,255,.92);
       border:1px solid rgba(13,47,111,.08);
       border-radius:28px;
       padding:22px;
       box-shadow:var(--shadow-soft);
       min-width:0;
+      backdrop-filter:blur(8px);
     }
 
     .testimonial{
@@ -567,6 +880,12 @@
       border-radius:18px;
       padding:14px;
       min-width:0;
+      transition:transform .3s ease, box-shadow .3s ease;
+    }
+
+    .testimonial:hover{
+      transform:translateY(-4px);
+      box-shadow:0 18px 38px rgba(10,35,90,.08);
     }
 
     .testimonial + .testimonial{
@@ -609,12 +928,13 @@
       margin-top:28px;
       background:
         linear-gradient(135deg, rgba(255,211,42,.16), rgba(36,95,209,.08)),
-        #fff;
+        rgba(255,255,255,.92);
       border:1px solid rgba(13,47,111,.08);
       border-radius:32px;
       padding:34px;
       box-shadow:var(--shadow-soft);
       text-align:center;
+      backdrop-filter:blur(8px);
     }
 
     .premium-band h3{
@@ -639,11 +959,18 @@
 
     .bonus-card{
       min-width:0;
-      background:#fff;
+      background:rgba(255,255,255,.92);
       border:1px solid rgba(13,47,111,.08);
       border-radius:28px;
       overflow:hidden;
       box-shadow:var(--shadow-soft);
+      backdrop-filter:blur(8px);
+      transition:transform .35s ease, box-shadow .35s ease;
+    }
+
+    .bonus-card:hover{
+      transform:translateY(-6px) rotateX(2deg);
+      box-shadow:0 24px 48px rgba(10,35,90,.14);
     }
 
     .bonus-top{
@@ -704,12 +1031,13 @@
     }
 
     .value-card{
-      background:#fff;
+      background:rgba(255,255,255,.92);
       border:1px solid rgba(13,47,111,.08);
       border-radius:32px;
       padding:30px;
       box-shadow:var(--shadow);
       min-width:0;
+      backdrop-filter:blur(8px);
     }
 
     .value-card h3{
@@ -751,7 +1079,7 @@
     .price-box{
       background:
         linear-gradient(135deg, rgba(255,211,42,.18), rgba(36,95,209,.10)),
-        #fff;
+        rgba(255,255,255,.95);
       border:2px solid rgba(13,47,111,.10);
       border-radius:34px;
       padding:28px;
@@ -760,6 +1088,7 @@
       position:sticky;
       top:18px;
       min-width:0;
+      backdrop-filter:blur(8px);
     }
 
     .price-box .from{
@@ -782,6 +1111,7 @@
       letter-spacing:-.05em;
       margin:14px 0 10px;
       word-break:break-word;
+      text-shadow:0 10px 25px rgba(19,185,78,.12);
     }
 
     .price-box .installments{
@@ -809,11 +1139,12 @@
       grid-template-columns:minmax(0, 1.08fr) minmax(0, .92fr);
       gap:28px;
       align-items:center;
-      background:linear-gradient(180deg,#fff 0%, #f7fbff 100%);
+      background:linear-gradient(180deg,rgba(255,255,255,.96) 0%, rgba(247,251,255,.94) 100%);
       border:1px solid rgba(13,47,111,.08);
       border-radius:34px;
       padding:30px;
       box-shadow:var(--shadow-soft);
+      backdrop-filter:blur(8px);
     }
 
     .about-card h2{
@@ -887,11 +1218,26 @@
       text-align:center;
       background:
         radial-gradient(circle at top center, rgba(255,211,42,.18), transparent 30%),
-        linear-gradient(180deg,#fff 0%, #f8fbff 100%);
+        linear-gradient(180deg,rgba(255,255,255,.96) 0%, rgba(248,251,255,.94) 100%);
       border:1px solid rgba(13,47,111,.08);
       border-radius:36px;
       padding:44px 26px;
       box-shadow:var(--shadow-soft);
+      backdrop-filter:blur(8px);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .final-cta::after{
+      content:"";
+      position:absolute;
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      right:-40px;
+      top:-40px;
+      background:radial-gradient(circle, rgba(36,95,209,.10), transparent 70%);
+      pointer-events:none;
     }
 
     .final-cta h2{
@@ -900,6 +1246,8 @@
       line-height:1.1;
       margin-bottom:14px;
       font-weight:900;
+      position:relative;
+      z-index:2;
     }
 
     .final-cta p{
@@ -909,6 +1257,8 @@
       line-height:1.7;
       color:var(--muted);
       font-weight:700;
+      position:relative;
+      z-index:2;
     }
 
     .footer{
@@ -917,6 +1267,8 @@
       color:var(--muted);
       font-size:14px;
       line-height:1.7;
+      position:relative;
+      z-index:2;
     }
 
     .fade-section{
@@ -966,10 +1318,6 @@
       text-align:center;
     }
 
-    /* =========================
-       RESPONSIVIDADE
-    ========================= */
-
     @media (max-width: 1180px){
       .hero-wrap{
         grid-template-columns:1fr;
@@ -1015,6 +1363,10 @@
         position:relative;
         top:auto;
       }
+
+      .edu-float.book{ left:-1%; }
+      .edu-float.ruler{ right:-2%; }
+      .edu-float.cap{ right:0; }
     }
 
     @media (max-width: 900px){
@@ -1053,6 +1405,51 @@
 
       .value-list li span:last-child{
         white-space:normal;
+      }
+
+      .edu-float.book{
+        width:88px;
+        height:114px;
+        top:10%;
+        left:-2%;
+      }
+
+      .edu-float.ruler{
+        width:124px;
+        height:44px;
+        top:27%;
+        right:-1%;
+      }
+
+      .edu-float.a-plus{
+        width:74px;
+        height:74px;
+        top:58%;
+        left:-1%;
+      }
+
+      .edu-float.cap{
+        width:92px;
+        height:92px;
+        top:76%;
+        right:0;
+      }
+
+      .edu-float.pencil{
+        height:130px;
+        width:42px;
+        left:4%;
+      }
+
+      .edu-float.note{
+        width:100px;
+        height:90px;
+        right:8%;
+      }
+
+      .edu-float.circle,
+      .edu-float.circle-2{
+        opacity:.5;
       }
     }
 
@@ -1195,6 +1592,53 @@
       body{
         padding-bottom:92px;
       }
+
+      .edu-float.note,
+      .edu-float.ruler,
+      .edu-float.circle-2{
+        display:none;
+      }
+
+      .edu-float.book{
+        width:74px;
+        height:96px;
+        left:-4%;
+        top:14%;
+        opacity:.55;
+      }
+
+      .edu-float.a-plus{
+        width:64px;
+        height:64px;
+        left:-3%;
+        top:62%;
+        opacity:.48;
+      }
+
+      .edu-float.cap{
+        width:76px;
+        height:76px;
+        right:-2%;
+        top:78%;
+        opacity:.5;
+      }
+
+      .edu-float.pencil{
+        width:36px;
+        height:104px;
+        left:auto;
+        right:1%;
+        top:38%;
+        opacity:.42;
+      }
+
+      .edu-float.circle{
+        width:120px;
+        height:120px;
+        left:-8%;
+        top:74%;
+        opacity:.38;
+      }
     }
 
     @media (max-width: 420px){
@@ -1222,438 +1666,494 @@
       .floating-card{
         display:none;
       }
+
+      .edu-float.book,
+      .edu-float.a-plus,
+      .edu-float.cap,
+      .edu-float.pencil,
+      .edu-float.circle{
+        opacity:.28;
+      }
     }
   </style>
 </head>
 <body>
 
-  <section class="hero fade-section">
-    <div class="container hero-wrap">
-      <div class="hero-copy">
-        <span class="eyebrow">📘 Método educacional prático para 11 a 16 anos</span>
-
-        <h1 class="title">
-          <span class="highlight">365 Atividades de Interpretação de Textos</span><br>
-          para ajudar seu filho a estudar com mais autonomia, confiança e resultado
-        </h1>
-
-        <p class="subtitle">
-          Um material completo, visual e organizado para pais e mães que querem ver seus filhos
-          evoluindo em leitura, compreensão e desempenho escolar, sem depender o tempo todo de reforço
-          e sem ficar perdidos na hora de ajudar em casa.
-        </p>
-
-        <div class="hero-points">
-          <div class="hero-point">
-            <div class="icon">✔</div>
-            <div>Ideal para <strong>crianças e adolescentes de 11 a 16 anos</strong></div>
-          </div>
-
-          <div class="hero-point">
-            <div class="icon">🖨</div>
-            <div>Prático para <strong>imprimir ou realizar no caderno</strong></div>
-          </div>
-
-          <div class="hero-point">
-            <div class="icon">🎯</div>
-            <div>Fortalece a <strong>interpretação de textos em várias disciplinas</strong></div>
-          </div>
-
-          <div class="hero-point">
-            <div class="icon">🚀</div>
-            <div>Base importante para a <strong>vida escolar e futura preparação acadêmica</strong></div>
-          </div>
-        </div>
-
-        <div class="cta-row">
-          <a href="#oferta" class="btn btn-primary">QUERO GARANTIR O ACESSO AGORA ➜</a>
-          <a href="#como-funciona" class="btn btn-secondary">VER COMO FUNCIONA</a>
-        </div>
-
-        <div class="hero-note">
-          Acesso rápido • Material digital • Conteúdo pensado para facilitar a rotina dos pais
-        </div>
+  <div class="float-scene" aria-hidden="true">
+    <div class="edu-float glass book float-spin-soft" data-speed="0.11" data-x="14" data-r="8">
+      <div class="edu-float-inner">
+        <div class="symbol">📘</div>
       </div>
+    </div>
 
-      <div class="hero-visual">
-        <div class="hero-card">
-          <div class="hero-badge">KIT COMPLETO + BÔNUS</div>
-
-          <div class="hero-main-img">
-            <img src="hero-produto.png" alt="Kit 365 Atividades de Interpretação Expert">
-          </div>
-
-          <div class="stats-strip">
-            <div class="stat">
-              <strong>365</strong>
-              <span>atividades prontas</span>
-            </div>
-            <div class="stat">
-              <strong>11-16</strong>
-              <span>faixa etária foco</span>
-            </div>
-            <div class="stat">
-              <strong>+4</strong>
-              <span>bônus especiais</span>
-            </div>
-          </div>
+    <div class="edu-float glass ruler float-spin-soft-2" data-speed="-0.08" data-x="-16" data-r="-12">
+      <div class="edu-float-inner">
+        <div class="ruler-lines">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
         </div>
+        <div class="symbol">✏️</div>
+      </div>
+    </div>
 
-        <div class="floating-card small-1">
-          <img src="hero-caderno.png" alt="Visual do material em uso no caderno">
-        </div>
+    <div class="edu-float glass a-plus float-spin-soft-3" data-speed="0.06" data-x="10" data-r="10">
+      <div class="edu-float-inner">
+        <div class="symbol">A+</div>
+      </div>
+    </div>
 
-        <div class="floating-card small-2">
-          <img src="hero-celular.png" alt="Visual do material no celular">
+    <div class="edu-float glass cap float-spin-soft" data-speed="-0.12" data-x="-10" data-r="-8">
+      <div class="edu-float-inner">
+        <div class="symbol">🎓</div>
+      </div>
+    </div>
+
+    <div class="edu-float glass pencil float-spin-soft-2" data-speed="0.09" data-x="8" data-r="14">
+      <div class="edu-float-inner">
+        <div class="symbol">✏️</div>
+      </div>
+    </div>
+
+    <div class="edu-float glass note float-spin-soft-3" data-speed="-0.05" data-x="-8" data-r="-7">
+      <div class="edu-float-inner">
+        <div class="symbol">📝</div>
+        <div class="mini-lines">
+          <span></span><span></span><span></span>
         </div>
       </div>
     </div>
-  </section>
 
-  <section class="section fade-section">
-    <div class="container">
-      <div class="split-card">
-        <div class="mood-card bad">
-          <h3>Quando seu filho tenta estudar e sente que não consegue avançar...</h3>
-          <div class="media">
-            <img src="problema-estudo.png" alt="Aluno com dificuldade nos estudos">
-          </div>
-        </div>
+    <div class="edu-float circle" data-speed="0.03" data-x="18" data-r="0"></div>
+    <div class="edu-float circle-2" data-speed="-0.025" data-x="-12" data-r="0"></div>
+  </div>
 
-        <div class="mood-card good">
-          <h3>Quando ele começa a praticar com o método certo e a evolução aparece...</h3>
-          <div class="media">
-            <img src="resultado-estudo.png" alt="Aluno evoluindo com o método">
-          </div>
-        </div>
-      </div>
+  <div class="page-shell">
+    <section class="hero fade-section">
+      <div class="container hero-wrap">
+        <div class="hero-copy">
+          <span class="eyebrow">📘 Método educacional prático para 11 a 16 anos</span>
 
-      <div class="problem-box">
-        <div class="section-head" style="margin-bottom:10px;">
-          <span class="eyebrow">⚠ Situações comuns na rotina dos pais</span>
-          <h2>Talvez hoje você esteja passando por isso em casa</h2>
-        </div>
+          <h1 class="title">
+            <span class="highlight">365 Atividades de Interpretação de Textos</span><br>
+            para ajudar seu filho a estudar com mais autonomia, confiança e resultado
+          </h1>
 
-        <ul class="problem-list">
-          <li><span class="dot">✕</span><span>Seu filho não consegue estudar sozinho e trava quando precisa interpretar textos.</span></li>
-          <li><span class="dot">✕</span><span>Sente dificuldade em várias disciplinas porque a base de compreensão está fraca.</span></li>
-          <li><span class="dot">✕</span><span>Você já gastou com reforço, mas ainda sente que o progresso foi abaixo do esperado.</span></li>
-          <li><span class="dot">✕</span><span>O vestibular, as provas e o futuro acadêmico estão chegando, e isso começa a preocupar.</span></li>
-          <li><span class="dot">✕</span><span>Ele evita leitura, escrita e interpretação porque acha difícil ou cansativo demais.</span></li>
-        </ul>
-      </div>
+          <p class="subtitle">
+            Um material completo, visual e organizado para pais e mães que querem ver seus filhos
+            evoluindo em leitura, compreensão e desempenho escolar, sem depender o tempo todo de reforço
+            e sem ficar perdidos na hora de ajudar em casa.
+          </p>
 
-      <div class="solution-band">
-        <h3>Você não precisa complicar a rotina nem gastar uma fortuna para começar a mudar isso.</h3>
-        <p>
-          Com o <strong>Kit 365 Atividades de Interpretação Expert</strong>, basta abrir, escolher a atividade do dia,
-          aplicar e acompanhar a evolução. É um método simples, organizado e visualmente agradável, feito para
-          facilitar a prática e melhorar a compreensão com consistência.
-        </p>
-      </div>
-    </div>
-  </section>
+          <div class="hero-points">
+            <div class="hero-point">
+              <div class="icon">✔</div>
+              <div>Ideal para <strong>crianças e adolescentes de 11 a 16 anos</strong></div>
+            </div>
 
-  <section id="como-funciona" class="section fade-section">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">🧩 Fácil de aplicar no dia a dia</span>
-        <h2>Com as 365 atividades, você só precisa seguir um caminho simples</h2>
-        <p>
-          Nada de ficar procurando exercício na internet, montando atividade do zero ou improvisando.
-          O método foi desenhado para ser prático, claro e funcional.
-        </p>
-      </div>
+            <div class="hero-point">
+              <div class="icon">🖨</div>
+              <div>Prático para <strong>imprimir ou realizar no caderno</strong></div>
+            </div>
 
-      <div class="steps-grid">
-        <article class="step-card">
-          <div class="step-img">
-            <img src="passo-1.png" alt="Escolher a atividade do dia">
-          </div>
-          <div class="step-number">1</div>
-          <h3>Abrir</h3>
-          <p>Escolha o conteúdo do dia de forma rápida, organizada e sem confusão.</p>
-        </article>
+            <div class="hero-point">
+              <div class="icon">🎯</div>
+              <div>Fortalece a <strong>interpretação de textos em várias disciplinas</strong></div>
+            </div>
 
-        <article class="step-card">
-          <div class="step-img">
-            <img src="passo-2.png" alt="Responsável sem precisar criar atividade">
-          </div>
-          <div class="step-number">2</div>
-          <h3>Aplicar</h3>
-          <p>Não precisa inventar nada. É só usar o material e conduzir com leveza.</p>
-        </article>
-
-        <article class="step-card">
-          <div class="step-img">
-            <img src="passo-3.png" alt="Material para imprimir ou realizar no caderno">
-          </div>
-          <div class="step-number">3</div>
-          <h3>Praticar</h3>
-          <p>Imprima ou use no caderno. O importante é manter a constância sem pesar a rotina.</p>
-        </article>
-
-        <article class="step-card">
-          <div class="step-img">
-            <img src="passo-4.png" alt="Aluno preparado e confiante">
-          </div>
-          <div class="step-number">4</div>
-          <h3>Evoluir</h3>
-          <p>Com o tempo, seu filho ganha mais compreensão, segurança e preparo para os estudos.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section fade-section">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">💬 Resultados percebidos na prática</span>
-        <h2>Pais e mães querem ver evolução real. E é isso que esse material busca entregar.</h2>
-        <p>
-          A proposta aqui não é ser mais um pacote genérico. É oferecer um material com direção,
-          sequência e aplicação simples para a rotina real das famílias.
-        </p>
-      </div>
-
-      <div class="testimonials">
-        <div class="testimonial-card">
-          <div class="testimonial">
-            <div class="avatar"><img src="depoimento-1-perfil.png" alt="Perfil depoimento 1"></div>
-            <div>
-              <strong>Ana Castro</strong>
-              <p>Meu filho sempre travava nas questões. Com uma rotina mais organizada, ele começou a responder com mais segurança.</p>
+            <div class="hero-point">
+              <div class="icon">🚀</div>
+              <div>Base importante para a <strong>vida escolar e futura preparação acadêmica</strong></div>
             </div>
           </div>
 
-          <div class="testimonial">
-            <div class="avatar"><img src="depoimento-2-perfil.png" alt="Perfil depoimento 2"></div>
-            <div>
-              <strong>Andréa Nogueira</strong>
-              <p>Eu achei que seria igual a outros materiais, mas aqui ficou muito mais fácil aplicar em casa.</p>
+          <div class="cta-row">
+            <a href="#oferta" class="btn btn-primary">QUERO GARANTIR O ACESSO AGORA ➜</a>
+            <a href="#como-funciona" class="btn btn-secondary">VER COMO FUNCIONA</a>
+          </div>
+
+          <div class="hero-note">
+            Acesso rápido • Material digital • Conteúdo pensado para facilitar a rotina dos pais
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-card">
+            <div class="hero-badge">KIT COMPLETO + BÔNUS</div>
+
+            <div class="hero-main-img">
+              <img src="hero-produto.png" alt="Kit 365 Atividades de Interpretação Expert">
+            </div>
+
+            <div class="stats-strip">
+              <div class="stat">
+                <strong>365</strong>
+                <span>atividades prontas</span>
+              </div>
+              <div class="stat">
+                <strong>11-16</strong>
+                <span>faixa etária foco</span>
+              </div>
+              <div class="stat">
+                <strong>+4</strong>
+                <span>bônus especiais</span>
+              </div>
             </div>
           </div>
 
-          <div class="testimonial">
-            <div class="avatar"><img src="depoimento-3-perfil.png" alt="Perfil depoimento 3"></div>
-            <div>
-              <strong>Carla Lima</strong>
-              <p>A gente começou fazendo uma atividade por dia e já senti mais disposição dele para estudar.</p>
+          <div class="floating-card small-1">
+            <img src="hero-caderno.png" alt="Visual do material em uso no caderno">
+          </div>
+
+          <div class="floating-card small-2">
+            <img src="hero-celular.png" alt="Visual do material no celular">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section fade-section">
+      <div class="container">
+        <div class="split-card">
+          <div class="mood-card bad">
+            <h3>Quando seu filho tenta estudar e sente que não consegue avançar...</h3>
+            <div class="media">
+              <img src="problema-estudo.png" alt="Aluno com dificuldade nos estudos">
+            </div>
+          </div>
+
+          <div class="mood-card good">
+            <h3>Quando ele começa a praticar com o método certo e a evolução aparece...</h3>
+            <div class="media">
+              <img src="resultado-estudo.png" alt="Aluno evoluindo com o método">
             </div>
           </div>
         </div>
 
-        <div class="testimonial-card">
-          <div class="testimonial">
-            <div class="avatar"><img src="depoimento-4-perfil.png" alt="Perfil depoimento 4"></div>
-            <div>
-              <strong>Thiago Martins</strong>
-              <p>Eu achava que ele iria reclamar bastante, mas o formato ficou leve e muito mais tranquilo de seguir.</p>
-            </div>
+        <div class="problem-box">
+          <div class="section-head" style="margin-bottom:10px;">
+            <span class="eyebrow">⚠ Situações comuns na rotina dos pais</span>
+            <h2>Talvez hoje você esteja passando por isso em casa</h2>
           </div>
 
-          <div class="testimonial">
-            <div class="avatar"><img src="depoimento-5-perfil.png" alt="Perfil depoimento 5"></div>
-            <div>
-              <strong>Patrícia Almeida</strong>
-              <p>Em pouco tempo já vimos diferença na forma como ele lê e tenta entender os enunciados.</p>
-            </div>
-          </div>
-
-          <div class="testimonial">
-            <div class="avatar"><img src="depoimento-6-perfil.png" alt="Perfil depoimento 6"></div>
-            <div>
-              <strong>Rodrigo Martins</strong>
-              <p>Eu já estava gastando muito com apoio escolar. Esse material deixou tudo mais acessível e prático.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="premium-band">
-        <h3>Não é um pacote aleatório para qualquer idade.</h3>
-        <p>
-          O material foi pensado para uma fase crucial do desenvolvimento escolar, com foco em compreensão,
-          interpretação, raciocínio e prática consistente. Tudo isso em uma linguagem visual mais atual,
-          agradável e organizada para essa faixa etária.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section fade-section">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">🎁 Mais valor no mesmo acesso</span>
-        <h2>Além das 365 atividades, você ainda recebe bônus que fortalecem a evolução</h2>
-        <p>
-          Esses materiais complementares ajudam a ampliar o repertório, reforçar a prática
-          e trazer ainda mais valor para o aprendizado.
-        </p>
-      </div>
-
-      <div class="bonus-grid">
-        <article class="bonus-card">
-          <div class="bonus-top">
-            <span class="bonus-tag">🔥 BÔNUS 1</span>
-          </div>
-          <div class="bonus-media">
-            <img src="bonus-1.png" alt="Bônus 1">
-          </div>
-          <div class="bonus-body">
-            <h3>10 Jogos Interativos de Interpretação</h3>
-            <p>Uma forma mais dinâmica de treinar atenção, leitura e compreensão.</p>
-          </div>
-        </article>
-
-        <article class="bonus-card">
-          <div class="bonus-top">
-            <span class="bonus-tag">🔥 BÔNUS 2</span>
-          </div>
-          <div class="bonus-media">
-            <img src="bonus-2.png" alt="Bônus 2">
-          </div>
-          <div class="bonus-body">
-            <h3>Apostila de Interpretação para o ENEM</h3>
-            <p>Um reforço importante para alunos que já estão caminhando para etapas mais avançadas.</p>
-          </div>
-        </article>
-
-        <article class="bonus-card">
-          <div class="bonus-top">
-            <span class="bonus-tag">🔥 BÔNUS 3</span>
-          </div>
-          <div class="bonus-media">
-            <img src="bonus-3.png" alt="Bônus 3">
-          </div>
-          <div class="bonus-body">
-            <h3>Macetes de Interpretação e Elaboração de Respostas</h3>
-            <p>Dicas práticas para melhorar a forma de compreender e responder com mais clareza.</p>
-          </div>
-        </article>
-
-        <article class="bonus-card">
-          <div class="bonus-top">
-            <span class="bonus-tag">🔥 SUPER BÔNUS</span>
-          </div>
-          <div class="bonus-media">
-            <img src="bonus-4.png" alt="Super bônus">
-          </div>
-          <div class="bonus-body">
-            <h3>Mini Treinamento de Técnicas de Estudo</h3>
-            <p>Um apoio extra para desenvolver rotina, foco e melhor aproveitamento dos estudos.</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="oferta" class="section fade-section">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">💎 Oferta especial</span>
-        <h2>Você poderia gastar muito mais com meses de tentativa, reforço e materiais soltos.</h2>
-        <p>
-          Mas aqui você acessa um kit completo, organizado e direto ao ponto para começar ainda hoje.
-        </p>
-      </div>
-
-      <div class="offer-wrap">
-        <div class="value-card">
-          <h3>Veja tudo o que você recebe neste pacote:</h3>
-          <ul class="value-list">
-            <li><span>👉 365 Atividades Ultra Eficientes</span><span>R$127</span></li>
-            <li><span>👉 10 Jogos Interativos de Interpretação</span><span>R$59</span></li>
-            <li><span>👉 Apostila Interpretação para o ENEM</span><span>R$69</span></li>
-            <li><span>👉 Macetes de Interpretação e Elaboração de Respostas</span><span>R$87</span></li>
-            <li><span>👉 Superbônus: Mini Treinamento de Técnicas de Estudo</span><span>R$187</span></li>
+          <ul class="problem-list">
+            <li><span class="dot">✕</span><span>Seu filho não consegue estudar sozinho e trava quando precisa interpretar textos.</span></li>
+            <li><span class="dot">✕</span><span>Sente dificuldade em várias disciplinas porque a base de compreensão está fraca.</span></li>
+            <li><span class="dot">✕</span><span>Você já gastou com reforço, mas ainda sente que o progresso foi abaixo do esperado.</span></li>
+            <li><span class="dot">✕</span><span>O vestibular, as provas e o futuro acadêmico estão chegando, e isso começa a preocupar.</span></li>
+            <li><span class="dot">✕</span><span>Ele evita leitura, escrita e interpretação porque acha difícil ou cansativo demais.</span></li>
           </ul>
         </div>
 
-        <div class="price-box">
-          <div class="from">De <span>R$529</span> por:</div>
-          <div class="now">R$57,00</div>
-          <div class="installments">acesso completo em um pagamento único</div>
+        <div class="solution-band">
+          <h3>Você não precisa complicar a rotina nem gastar uma fortuna para começar a mudar isso.</h3>
+          <p>
+            Com o <strong>Kit 365 Atividades de Interpretação Expert</strong>, basta abrir, escolher a atividade do dia,
+            aplicar e acompanhar a evolução. É um método simples, organizado e visualmente agradável, feito para
+            facilitar a prática e melhorar a compreensão com consistência.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="como-funciona" class="section fade-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">🧩 Fácil de aplicar no dia a dia</span>
+          <h2>Com as 365 atividades, você só precisa seguir um caminho simples</h2>
+          <p>
+            Nada de ficar procurando exercício na internet, montando atividade do zero ou improvisando.
+            O método foi desenhado para ser prático, claro e funcional.
+          </p>
+        </div>
+
+        <div class="steps-grid">
+          <article class="step-card">
+            <div class="step-img">
+              <img src="passo-1.png" alt="Escolher a atividade do dia">
+            </div>
+            <div class="step-number">1</div>
+            <h3>Abrir</h3>
+            <p>Escolha o conteúdo do dia de forma rápida, organizada e sem confusão.</p>
+          </article>
+
+          <article class="step-card">
+            <div class="step-img">
+              <img src="passo-2.png" alt="Responsável sem precisar criar atividade">
+            </div>
+            <div class="step-number">2</div>
+            <h3>Aplicar</h3>
+            <p>Não precisa inventar nada. É só usar o material e conduzir com leveza.</p>
+          </article>
+
+          <article class="step-card">
+            <div class="step-img">
+              <img src="passo-3.png" alt="Material para imprimir ou realizar no caderno">
+            </div>
+            <div class="step-number">3</div>
+            <h3>Praticar</h3>
+            <p>Imprima ou use no caderno. O importante é manter a constância sem pesar a rotina.</p>
+          </article>
+
+          <article class="step-card">
+            <div class="step-img">
+              <img src="passo-4.png" alt="Aluno preparado e confiante">
+            </div>
+            <div class="step-number">4</div>
+            <h3>Evoluir</h3>
+            <p>Com o tempo, seu filho ganha mais compreensão, segurança e preparo para os estudos.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section fade-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">💬 Resultados percebidos na prática</span>
+          <h2>Pais e mães querem ver evolução real. E é isso que esse material busca entregar.</h2>
+          <p>
+            A proposta aqui não é ser mais um pacote genérico. É oferecer um material com direção,
+            sequência e aplicação simples para a rotina real das famílias.
+          </p>
+        </div>
+
+        <div class="testimonials">
+          <div class="testimonial-card">
+            <div class="testimonial">
+              <div class="avatar"><img src="depoimento-1-perfil.png" alt="Perfil depoimento 1"></div>
+              <div>
+                <strong>Ana Castro</strong>
+                <p>Meu filho sempre travava nas questões. Com uma rotina mais organizada, ele começou a responder com mais segurança.</p>
+              </div>
+            </div>
+
+            <div class="testimonial">
+              <div class="avatar"><img src="depoimento-2-perfil.png" alt="Perfil depoimento 2"></div>
+              <div>
+                <strong>Andréa Nogueira</strong>
+                <p>Eu achei que seria igual a outros materiais, mas aqui ficou muito mais fácil aplicar em casa.</p>
+              </div>
+            </div>
+
+            <div class="testimonial">
+              <div class="avatar"><img src="depoimento-3-perfil.png" alt="Perfil depoimento 3"></div>
+              <div>
+                <strong>Carla Lima</strong>
+                <p>A gente começou fazendo uma atividade por dia e já senti mais disposição dele para estudar.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial">
+              <div class="avatar"><img src="depoimento-4-perfil.png" alt="Perfil depoimento 4"></div>
+              <div>
+                <strong>Thiago Martins</strong>
+                <p>Eu achava que ele iria reclamar bastante, mas o formato ficou leve e muito mais tranquilo de seguir.</p>
+              </div>
+            </div>
+
+            <div class="testimonial">
+              <div class="avatar"><img src="depoimento-5-perfil.png" alt="Perfil depoimento 5"></div>
+              <div>
+                <strong>Patrícia Almeida</strong>
+                <p>Em pouco tempo já vimos diferença na forma como ele lê e tenta entender os enunciados.</p>
+              </div>
+            </div>
+
+            <div class="testimonial">
+              <div class="avatar"><img src="depoimento-6-perfil.png" alt="Perfil depoimento 6"></div>
+              <div>
+                <strong>Rodrigo Martins</strong>
+                <p>Eu já estava gastando muito com apoio escolar. Esse material deixou tudo mais acessível e prático.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="premium-band">
+          <h3>Não é um pacote aleatório para qualquer idade.</h3>
+          <p>
+            O material foi pensado para uma fase crucial do desenvolvimento escolar, com foco em compreensão,
+            interpretação, raciocínio e prática consistente. Tudo isso em uma linguagem visual mais atual,
+            agradável e organizada para essa faixa etária.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section fade-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">🎁 Mais valor no mesmo acesso</span>
+          <h2>Além das 365 atividades, você ainda recebe bônus que fortalecem a evolução</h2>
+          <p>
+            Esses materiais complementares ajudam a ampliar o repertório, reforçar a prática
+            e trazer ainda mais valor para o aprendizado.
+          </p>
+        </div>
+
+        <div class="bonus-grid">
+          <article class="bonus-card">
+            <div class="bonus-top">
+              <span class="bonus-tag">🔥 BÔNUS 1</span>
+            </div>
+            <div class="bonus-media">
+              <img src="bonus-1.png" alt="Bônus 1">
+            </div>
+            <div class="bonus-body">
+              <h3>10 Jogos Interativos de Interpretação</h3>
+              <p>Uma forma mais dinâmica de treinar atenção, leitura e compreensão.</p>
+            </div>
+          </article>
+
+          <article class="bonus-card">
+            <div class="bonus-top">
+              <span class="bonus-tag">🔥 BÔNUS 2</span>
+            </div>
+            <div class="bonus-media">
+              <img src="bonus-2.png" alt="Bônus 2">
+            </div>
+            <div class="bonus-body">
+              <h3>Apostila de Interpretação para o ENEM</h3>
+              <p>Um reforço importante para alunos que já estão caminhando para etapas mais avançadas.</p>
+            </div>
+          </article>
+
+          <article class="bonus-card">
+            <div class="bonus-top">
+              <span class="bonus-tag">🔥 BÔNUS 3</span>
+            </div>
+            <div class="bonus-media">
+              <img src="bonus-3.png" alt="Bônus 3">
+            </div>
+            <div class="bonus-body">
+              <h3>Macetes de Interpretação e Elaboração de Respostas</h3>
+              <p>Dicas práticas para melhorar a forma de compreender e responder com mais clareza.</p>
+            </div>
+          </article>
+
+          <article class="bonus-card">
+            <div class="bonus-top">
+              <span class="bonus-tag">🔥 SUPER BÔNUS</span>
+            </div>
+            <div class="bonus-media">
+              <img src="bonus-4.png" alt="Super bônus">
+            </div>
+            <div class="bonus-body">
+              <h3>Mini Treinamento de Técnicas de Estudo</h3>
+              <p>Um apoio extra para desenvolver rotina, foco e melhor aproveitamento dos estudos.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="oferta" class="section fade-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">💎 Oferta especial</span>
+          <h2>Você poderia gastar muito mais com meses de tentativa, reforço e materiais soltos.</h2>
+          <p>
+            Mas aqui você acessa um kit completo, organizado e direto ao ponto para começar ainda hoje.
+          </p>
+        </div>
+
+        <div class="offer-wrap">
+          <div class="value-card">
+            <h3>Veja tudo o que você recebe neste pacote:</h3>
+            <ul class="value-list">
+              <li><span>👉 365 Atividades Ultra Eficientes</span><span>R$127</span></li>
+              <li><span>👉 10 Jogos Interativos de Interpretação</span><span>R$59</span></li>
+              <li><span>👉 Apostila Interpretação para o ENEM</span><span>R$69</span></li>
+              <li><span>👉 Macetes de Interpretação e Elaboração de Respostas</span><span>R$87</span></li>
+              <li><span>👉 Superbônus: Mini Treinamento de Técnicas de Estudo</span><span>R$187</span></li>
+            </ul>
+          </div>
+
+          <div class="price-box">
+            <div class="from">De <span>R$529</span> por:</div>
+            <div class="now">R$57,00</div>
+            <div class="installments">acesso completo em um pagamento único</div>
+
+            <a href="https://pay.kiwify.com.br/j9PrqO5" class="btn btn-primary">
+              CLIQUE AQUI PARA FAZER SUA INSCRIÇÃO ➜
+            </a>
+
+            <div class="security">
+              Compra digital • Acesso rápido • Comece a aplicar hoje mesmo
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section fade-section">
+      <div class="container">
+        <div class="about-card">
+          <div>
+            <span class="eyebrow">👩‍🏫 Sobre a especialista</span>
+            <h2>Quem é Sarah Fialho - Psicopedagoga?</h2>
+
+            <p>
+              Prazer, sou <strong>Sarah Fialho - Psicopedagoga</strong>. Ao longo da minha trajetória,
+              acompanhei de perto as dificuldades que muitas crianças e adolescentes enfrentam quando
+              não conseguem interpretar bem o que leem.
+            </p>
+
+            <p>
+              E isso impacta não apenas uma matéria, mas praticamente toda a vida escolar:
+              provas, atividades, produção de texto, confiança e desempenho geral.
+            </p>
+
+            <p>
+              Foi por isso que organizei este material: para oferecer aos pais e mães um caminho mais
+              claro, acessível e funcional, capaz de estimular leitura crítica, atenção, raciocínio e
+              compreensão de forma prática.
+            </p>
+          </div>
+
+          <div class="about-media">
+            <div class="about-main">
+              <img src="sarah-fialho.png" alt="Sarah Fialho - Psicopedagoga">
+            </div>
+
+            <div class="about-badge">
+              <strong>Sarah Fialho - Psicopedagoga</strong>
+              <span>
+                Material estruturado para apoiar famílias e ajudar alunos de 11 a 16 anos
+                a desenvolverem interpretação com mais confiança.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section fade-section">
+      <div class="container">
+        <div class="final-cta">
+          <h2>Você já sabe o que precisa fazer. Falta só começar.</h2>
+          <p>
+            Este material foi pensado para ajudar você a dar um passo firme na educação do seu filho.
+            Em poucos minutos, você já pode ter acesso ao conteúdo e iniciar a primeira atividade.
+          </p>
 
           <a href="https://pay.kiwify.com.br/j9PrqO5" class="btn btn-primary">
-            CLIQUE AQUI PARA FAZER SUA INSCRIÇÃO ➜
+            QUERO O KIT 365 ATIVIDADES EXPERT ➜
           </a>
-
-          <div class="security">
-            Compra digital • Acesso rápido • Comece a aplicar hoje mesmo
-          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="section fade-section">
-    <div class="container">
-      <div class="about-card">
-        <div>
-          <span class="eyebrow">👩‍🏫 Sobre a especialista</span>
-          <h2>Quem é Sarah Fialho - Psicopedagoga?</h2>
-
-          <p>
-            Prazer, sou <strong>Sarah Fialho - Psicopedagoga</strong>. Ao longo da minha trajetória,
-            acompanhei de perto as dificuldades que muitas crianças e adolescentes enfrentam quando
-            não conseguem interpretar bem o que leem.
-          </p>
-
-          <p>
-            E isso impacta não apenas uma matéria, mas praticamente toda a vida escolar:
-            provas, atividades, produção de texto, confiança e desempenho geral.
-          </p>
-
-          <p>
-            Foi por isso que organizei este material: para oferecer aos pais e mães um caminho mais
-            claro, acessível e funcional, capaz de estimular leitura crítica, atenção, raciocínio e
-            compreensão de forma prática.
-          </p>
-        </div>
-
-        <div class="about-media">
-          <div class="about-main">
-            <img src="sarah-fialho.png" alt="Sarah Fialho - Psicopedagoga">
-          </div>
-
-          <div class="about-badge">
-            <strong>Sarah Fialho - Psicopedagoga</strong>
-            <span>
-              Material estruturado para apoiar famílias e ajudar alunos de 11 a 16 anos
-              a desenvolverem interpretação com mais confiança.
-            </span>
-          </div>
-        </div>
+    <footer class="footer">
+      <div class="container">
+        Kit 365 Atividades de Interpretação Expert •
       </div>
+    </footer>
+
+    <div class="mobile-cta">
+      <a href="https://pay.kiwify.com.br/j9PrqO5" class="btn btn-primary">GARANTIR ACESSO AGORA ➜</a>
     </div>
-  </section>
-
-  <section class="section fade-section">
-    <div class="container">
-      <div class="final-cta">
-        <h2>Você já sabe o que precisa fazer. Falta só começar.</h2>
-        <p>
-          Este material foi pensado para ajudar você a dar um passo firme na educação do seu filho.
-          Em poucos minutos, você já pode ter acesso ao conteúdo e iniciar a primeira atividade.
-        </p>
-
-        <a href="https://pay.kiwify.com.br/j9PrqO5" class="btn btn-primary">
-          QUERO O KIT 365 ATIVIDADES EXPERT ➜
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="container">
-      Kit 365 Atividades de Interpretação Expert •<br>
-      
-    </div>
-  </footer>
-
-  <div class="mobile-cta">
-    <a href="https://pay.kiwify.com.br/j9PrqO5" class="btn btn-primary">GARANTIR ACESSO AGORA ➜</a>
   </div>
 
   <script>
@@ -1684,6 +2184,55 @@
       });
 
       sections.forEach(section => observer.observe(section));
+    })();
+
+    (function(){
+      const floats = document.querySelectorAll('.edu-float');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (reduceMotion) return;
+
+      let ticking = false;
+
+      function updateFloats(){
+        const scrollY = window.scrollY || window.pageYOffset;
+        const viewportW = window.innerWidth;
+
+        floats.forEach((el, index) => {
+          const speed = parseFloat(el.dataset.speed || 0.05);
+          const sideX = parseFloat(el.dataset.x || 0);
+          const rot = parseFloat(el.dataset.r || 0);
+
+          const yMove = scrollY * speed;
+          const xMove = Math.sin((scrollY * 0.002) + index) * sideX;
+          const rotate = rot + Math.sin((scrollY * 0.0016) + index) * 4;
+          const depth = Math.cos((scrollY * 0.0014) + index) * 10;
+
+          el.style.transform = `
+            translate3d(${xMove}px, ${yMove}px, ${depth}px)
+            rotate(${rotate}deg)
+            rotateX(${depth * 0.18}deg)
+            rotateY(${depth * 0.12}deg)
+          `;
+
+          if (viewportW < 640) {
+            el.style.opacity = '';
+          }
+        });
+
+        ticking = false;
+      }
+
+      function onScroll(){
+        if (!ticking) {
+          window.requestAnimationFrame(updateFloats);
+          ticking = true;
+        }
+      }
+
+      updateFloats();
+      window.addEventListener('scroll', onScroll, { passive:true });
+      window.addEventListener('resize', onScroll);
     })();
   </script>
 
